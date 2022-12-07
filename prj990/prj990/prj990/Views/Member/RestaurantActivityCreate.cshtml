@@ -1,0 +1,272 @@
+﻿@model prj990.Models.tActivity
+@using prj990.Models;
+
+@{ ViewBag.Title = "ActivityCreate";
+  Layout = "~/Views/Shared/_LayoutMember.cshtml"; }
+
+<style>
+  * {
+    box-sizing: border-box
+  }
+
+  .Create {
+    width: 420px;
+    margin: 0 auto;
+  }
+</style>
+
+
+@using(Html.BeginForm())
+  {
+@Html.AntiForgeryToken()
+        <div class="py-5">
+          <div class="Create">
+            <div class="card shadow border-0">
+              <div class="card-body">
+
+                <div class="form-horizontal">
+                  <h2 class="text-center text-big1">開始揪團</h2>
+
+                  @Html.ValidationSummary(true,"",new { @class = "text-danger" })
+
+                  @* 記錄主揪ID *@
+                  @{ int userID = 0;
+                    if(Session[CDictionary.SK_LOGINED_USER] != null)
+                      {
+                      userID = (Session[CDictionary.SK_LOGINED_USER] as tMember).fId;
+                      } }
+                  @Html.TextBoxFor(model => model.fHostId,new { @Value = userID,@type = "hidden" })
+                  @* 預設活動狀態 *@
+                  @Html.TextBoxFor(model => model.fState,new { @Value = 1,@type = "hidden" })
+
+                  @* <div class="form-group">
+                        @Html.LabelFor(model => model.fAId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fAId, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fAId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fName,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.EditorFor(model => model.fName,new { htmlAttributes = new { @class = "form-control",placeholder = "取一個吸引人的活動名稱吧~" } })
+                      @Html.ValidationMessageFor(model => model.fName,"",new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fRestaurant,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.EditorFor(model => model.fRestaurant,new { htmlAttributes = new { @class = "form-control",@Value = @ViewBag.Rname } })
+                      @Html.ValidationMessageFor(model => model.fRestaurant,"",new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fAddress,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.EditorFor(model => model.fAddress,new { htmlAttributes = new { @class = "form-control",@Value = @ViewBag.Raddress } })
+                      @Html.ValidationMessageFor(model => model.fAddress,"",new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fActivityTime,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.EditorFor(model => model.fActivityTime,new { htmlAttributes = new { @class = "form-control",type = "datetime-local" } })
+                      @Html.ValidationMessageFor(model => model.fActivityTime,"",new { @class = "text-danger" })
+                      <span class="text-danger field-validation-error" name="time1-error" id="time1-error"></span>
+                      <script>
+
+                        var today = new Date();
+                        var dd = today.getDate();
+                        var MM = today.getMonth() + 1;
+                        var yyyy = today.getFullYear();
+                        var hh = today.getHours();
+                        var mm = today.getMinutes();
+
+
+
+                        if (dd < 10) {
+                          dd = '0' + dd
+                        }
+                        if (MM < 10) {
+                          MM = '0' + MM
+                        }
+                        if (mm < 10) {
+                          mm = '0' + mm
+                        }
+                        today = yyyy + '-' + MM + '-' + dd + 'T' + hh + ':' + mm;
+                        document.getElementById("fActivityTime").setAttribute("min", today);
+                      </script>
+                    </div>
+                  </div>
+                  <div class="form-group">
+
+                    @Html.LabelFor(model => model.fConfirmTime,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.EditorFor(model => model.fConfirmTime,new { htmlAttributes = new { @class = "form-control",type = "datetime-local",onchange = "Compare()" } })
+                      @Html.ValidationMessageFor(model => model.fConfirmTime,"",new { @class = "text-danger" })
+                      <span class="text-danger field-validation-error" name="time2-error" id="time2-error"></span>
+                      <script>
+
+                        var today = new Date();
+                        var dd = today.getDate();
+                        var MM = today.getMonth() + 1;
+                        var yyyy = today.getFullYear();
+                        var hh = today.getHours();
+                        var mm = today.getMinutes();
+
+
+
+                        if (dd < 10) {
+                          dd = '0' + dd
+                        }
+                        if (MM < 10) {
+                          MM = '0' + MM
+                        }
+                        if (mm < 10) {
+                          mm = '0' + mm
+                        }
+                        today = yyyy + '-' + MM + '-' + dd + 'T' + hh + ':' + mm;
+                        document.getElementById("fConfirmTime").setAttribute("min", today);
+                      </script>
+
+                      <script language="javascript">
+                        function Compare() {
+                          var AT = document.getElementById("fActivityTime");
+                          var CT = document.getElementById("fConfirmTime");
+                          if (AT.value < CT.value) {
+                            document.getElementById("time1-error").innerHTML = '活動時間必須大於審核時間';
+                            document.getElementById("time2-error").innerHTML = '審核時間不能大於活動時間';
+
+
+                            /* document.getElementById("fActivityTime").value = '';*/
+                            document.getElementById("fConfirmTime").value = '';
+
+                          }
+                          else {
+                            document.getElementById("time1-error").innerHTML = '';
+                            document.getElementById("time2-error").innerHTML = '';
+
+                          }
+
+
+                        }
+                      </script>
+                    </div>
+                  </div>
+
+                  @*<div class="form-group">
+                        @Html.LabelFor(model => model.fHostName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fHostName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fHostName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fPCount,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.EditorFor(model => model.fPCount,new { htmlAttributes = new { @class = "form-control",min = "1",max = "100" } })
+                      @Html.ValidationMessageFor(model => model.fPCount,"",new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fGender,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.RadioButtonFor(Model => Model.fGender,1,new { @id = "gender1",@name = "gender1",@Checked = "checked" })
+                      <label>@ViewBag.gender1</label>
+                      @Html.RadioButtonFor(Model => Model.fGender,2,new { @id = "gender2",@name = "gender2" })
+                      <label>@ViewBag.gender2</label>
+                      @Html.RadioButtonFor(Model => Model.fGender,3,new { @id = "gender3",@name = "gender3" })
+                      <label>@ViewBag.gender3</label>
+                      @Html.ValidationMessageFor(model => model.fGender,"",new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  @* <div class="form-group">
+                        @Html.LabelFor(model => model.fQty, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fQty, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fQty, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fPrice,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.EditorFor(model => model.fPrice,new { htmlAttributes = new { @class = "form-control",placeholder = "預計金額0~10000" } })
+                      @Html.ValidationMessageFor(model => model.fPrice,"",new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+
+
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fCheckout,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.RadioButtonFor(Model => Model.fCheckout,1,new { @id = "checkout1",@name = "checkout1",@Checked = "checked" })
+                      <label for="checkout1">@ViewBag.checkout1</label>
+                      @Html.RadioButtonFor(Model => Model.fCheckout,2,new { @id = "checkout2",@name = "checkout2" })
+                      <label for="checkout2">@ViewBag.checkout2</label>
+                      @Html.RadioButtonFor(Model => Model.fCheckout,3,new { @id = "checkout3",@name = "checkout3" })
+                      <label for="checkout3">@ViewBag.checkout3</label>
+                      @Html.RadioButtonFor(Model => Model.fCheckout,4,new { @id = "checkout4",@name = "checkout4" })
+                      <label for="checkout4">@ViewBag.checkout4 </label>
+                      @Html.ValidationMessageFor(model => model.fCheckout,"",new { @class = "text-danger" })
+                    </div>
+                  </div>
+                  @*<div class="form-group">
+                        @Html.LabelFor(model => model.fImag,htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fImag,new { htmlAttributes = new { @class = "form-control",type = "file" } })
+                            @Html.ValidationMessageFor(model => model.fImag,"",new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fInfo,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.EditorFor(model => model.fInfo,new { htmlAttributes = new { @class = "form-control",placeholder = "推薦自己的活動" } })
+                      @Html.ValidationMessageFor(model => model.fInfo,"",new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  @*<div class="form-group">
+                        @Html.LabelFor(model => model.fRInfo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fRInfo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fRInfo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+
+
+                  <div class="form-group">
+                    <div class="col-md-offset-2 col-md-12">
+                      <input type="submit" value="送出" class="btn btn-info mt-3  w-100 d-block" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>}
+
+<div>
+  <input class="btn btn-dark " type="button" onclick="history.back()" value="回到上一頁" />
+</div>
+
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+}

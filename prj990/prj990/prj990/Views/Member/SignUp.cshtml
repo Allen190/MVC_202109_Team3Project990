@@ -1,0 +1,109 @@
+﻿@*@model prj990.Models.tActivity*@
+@model prj990.ViewModel.CSignUpViewModel
+@{ ViewBag.Title = "SignUp";
+  Layout = "~/Views/Shared/_LayoutMember.cshtml"; }
+<style>
+  * {
+    box-sizing: border-box
+  }
+
+  .login {
+    width: 400px;
+    margin: 0 auto;
+  }
+</style>
+
+
+@using(Html.BeginForm())
+  {
+
+  string gender = "";
+  if(@Model.Activity.fGender == 1)
+    {
+    gender = @ViewBag.gender1;
+    }
+  else if(@Model.Activity.fGender == 2)
+    {
+    gender = @ViewBag.gender2;
+    }
+  else if(@Model.Activity.fGender == 3)
+    {
+    gender = @ViewBag.gender3;
+    }
+  string checkout = "";
+  if(@Model.Activity.fCheckout == 1)
+    {
+    checkout = @ViewBag.checkout1;
+    }
+  else if(@Model.Activity.fCheckout == 2)
+    {
+    checkout = @ViewBag.checkout2;
+    }
+  else if(@Model.Activity.fCheckout == 3)
+    {
+    checkout = @ViewBag.checkout3;
+    }
+  else if(@Model.Activity.fCheckout == 4)
+    {
+    checkout = @ViewBag.checkout4;
+    }
+
+
+<div class="py-5">
+  <div class="login">
+    <div class="card shadow border-0">
+      <div class="card-body">
+        <div class="form-horizontal">
+          <h2 class=" text-center text-big1 ">確認報名</h2>
+          <input type="hidden" name="txtFid" value="@Model.Activity.fId">
+
+          @{ foreach(var host in Model.Member)
+              {
+              if(host.fId == @Model.Activity.fHostId)
+                {
+    <p><img src="~/images/member/@host.fImg" class=" rounded-circle me-3 me-3 my-3" style="width:100px;height:100px" ; />主揪人: @Html.ActionLink(@host.fName,"MemberInfopublic",new { id = host.fId },new { @style = "text-decoration:none  ; color: #00879a  " }) </p>}
+  } }
+          <h4 class="card-title">
+            <b>
+              @Model.Activity.fName
+            </b>
+          </h4>
+          <h5>
+            餐廳：
+            @Model.Activity.fRestaurant
+            <br />
+            地址：
+            @Model.Activity.fAddress
+            <br />
+            活動時間：
+            @Model.Activity.fActivityTime
+
+          </h5>
+          <ul>
+            <li>
+              邀請人數:
+              @Model.Activity.fPCount
+              人
+            </li>
+
+            <li>性別限制：@gender </li>
+
+            <li>結帳方式：@checkout</li>
+            <li>預計金額：@Model.Activity.fPrice 元</li>
+          </ul>
+          活動資訊: @Model.Activity.fInfo<br />
+
+          主揪最後確認時間：<br />
+          @Model.Activity.fConfirmTime<br />
+
+          留言推薦自己：<br />
+          <input class="visible-md-block w-100" name="txtmessage" value="@ViewBag.message" />
+          <div class="my-3">
+            <input type="submit" value="確認報名" class="btn btn-info " style="float:right">
+            <input class="btn btn-dark " type="button" onclick="history.back()" value="取消" style="float:left" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>}

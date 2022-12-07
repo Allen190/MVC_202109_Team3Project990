@@ -1,0 +1,44 @@
+﻿@model IEnumerable<prj990.Models.tMember>
+
+@{ ViewBag.Title = "MemberInfoList";
+  Layout = "~/Views/Shared/_LayoutMember.cshtml"; }
+
+<style>
+  * {
+    box-sizing: border-box
+  }
+
+  .MemberInfo {
+    width: 400px;
+    margin: 0 auto;
+  }
+</style>
+
+<h2 class="text-big1 mt-4">@Session["MemberName"]的會員資料</h2>
+
+<p style="margin-top:20px">
+  @Html.ActionLink("編輯我的資料","MemberInfoEdit","null",new { @class = "btn btn-success" })
+</p>
+
+<div class=" row" style="margin-top:20px;">
+  @foreach(var item in Model)
+    {
+<div class="class=" py-5"">
+  <div class="MemberInfo">
+    <div class="card shadow border-0">
+      <img class="d-block mx-auto  rounded-circle my-3" src="~/images/Member/@item.fImg" style="width:120px;height:120px;" />
+      <div class="caption text-center ">
+        <h4>@item.fName</h4>
+        <p>年齡:@item.fAge</p>
+        <p>@item.fGender</p>
+        <p>@item.fHobby</p>
+        <p>
+          <a href="@Url.Action("ActivityCreate", "Member")?fId=@item.fId" class="btn btn-info">開啟揪團</a>
+          @*@Html.ActionLink("刪除會員", "MemberDelete", new { id = item.fId }, new { onclick = "return confirm('確定要刪除嗎?');", @class = "btn btn-danger" })*@
+
+        </p>
+      </div>
+    </div>
+  </div>
+</div>}
+</div>

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<prj990.Models.tRestaurant>
+
+@{ ViewBag.Title = "Index";
+  Layout = "~/Views/Shared/_LayoutMember.cshtml"; }
+
+<style>
+  .scale {
+    transition: all 0.5s;
+  }
+
+    .scale:hover {
+      transform: scale(1.1);
+    }
+</style>
+<h2 class="mt-4 text-big1  ">餐廳推薦</h2>
+@using(Html.BeginForm())
+  {
+<p>
+  關鍵字 @Html.TextBox("txtKeyword")
+  <input class="btn btn-info" type="submit" value="查詢">
+</p>}
+@if(ViewBag.userid == 9)
+  {
+<p style="margin-top:20px">
+  @Html.ActionLink("新增","Create","null",new { @class = " btn btn-success" })
+</p>}
+
+<div class=" row" style="margin-top:20px;">
+  @foreach(var item in Model)
+    {
+<div class="col-md-3">
+  <div class="card shadow border-0 my-3">
+    <div class="card-body">
+      <img class=" card-img-top rounded scale " src="~/images/Restaurant/@item.fImg" />
+      <div class="caption text-center">
+        <h4 class="mt-3">@item.fName</h4>
+        <p>@item.fAddress</p>
+        <p>電話：@item.fTel</p>
+        <p>營業時間：@item.fData</p>
+        <p>價位：@item.fPrice</p>
+        <p>優惠：@item.fDiscount</p>
+        <p><a href="@item.fInfo">官網</a></p>
+        <p>
+          @Html.ActionLink("開啟揪團","RestaurantActivityCreate","Member",new { Rid = item.fId },new { @class = " btn btn-info" })
+
+          @if(ViewBag.userid == 9)
+            {
+  @Html.ActionLink("修改","Edit",new { id = item.fId },new { @class = " btn btn-success ms-2 " })
+            @Html.ActionLink("刪除","Delete",new { id = item.fId },new { @class = " btn btn-danger ms-2",onclick = "return confirm('確定要刪除嗎?')" })}
+
+        </p>
+      </div>
+    </div>
+  </div>
+</div>}
+
+</div>

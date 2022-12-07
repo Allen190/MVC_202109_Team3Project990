@@ -1,0 +1,109 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using prj990.Models;
+using System.Web.Security;//Web表單驗證用
+
+namespace prj990.Controllers
+{
+    public class HomeController : Controller
+    {
+        
+                                                         // GET: Home
+        /* public ActionResult Index()
+         {
+             var Restaurant = db.tRestaurant.OrderByDescending(m => m.fId).ToList();
+             //var Restaurant = from p in (new db990DemoEntities2()).tRestaurant select (p);
+              return View(Restaurant);
+         }*/
+       
+        
+        public ActionResult List()
+        {   
+
+            IEnumerable<tRestaurant> Restaurant = null;
+            string keyword = Request.Form["txtKeyword"];
+            if (string.IsNullOrEmpty(keyword))
+                Restaurant= from p in (new db990DemoEntities2()).tRestaurant select p;
+            else
+                Restaurant = from p in (new db990DemoEntities2()).tRestaurant where p.fName.Contains(keyword) ||
+                  p.fAddress.Contains(keyword) ||
+                  p.fData.Contains(keyword) select p;
+               return View(Restaurant);
+        }
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(string fUserId, string fPWd)
+        {
+            db990DemoEntities2 db = new db990DemoEntities2();//新增找工廠
+            var member = db.tMember.Where(m => m.fUserId == fUserId && m.fPWd == fPWd).FirstOrDefault();
+            if (member == null)
+            {
+                ViewBag.Message = "帳密錯誤，登入失敗...";
+                return View();
+            }
+            Session["WelCome"] = member.fName + "歡迎光臨";
+            FormsAuthentication.RedirectFromLoginPage(fUserId, true);
+            return RedirectToAction("List", "Member");
+        }
+        public ActionResult Edit(int id)
+        {
+            db990DemoEntities2 db = new db990DemoEntities2();//新增找工廠
+            tRestaurant prod = db.tRestaurant.FirstOrDefault(p => p.fId == id);
+            if (prod == null)
+            
+                return RedirectToAction("List");
+                return View(prod);
+        }
+        [HttpPost]
+        public ActionResult Edit(tRestaurant prod)
+        {
+            db990DemoEntities2 db = new db990DemoEntities2();//新增找工廠
+            tRestaurant prodEdit = db.tRestaurant.FirstOrDefault(p => p.fId == prod.fId);
+            if (prodEdit != null)
+            {
+                prodEdit.fName = prod.fName;
+                prodEdit.fAddress = prod.fAddress;
+                prodEdit.fTel = prod.fTel;
+                prodEdit.fPrice = prod.fPrice;
+                prodEdit.fDiscount= prod.fDiscount;
+                prodEdit.fData = prod.fData;
+                prodEdit.fImg = prod.fImg;
+                prodEdit.fInfo = prod.fInfo;
+                db.SaveChanges();
+
+            }
+            return RedirectToAction("List");
+        }
+        public ActionResult Delete(int id)
+        {
+            db990DemoEntities2 db = new db990DemoEntities2();//新增找工廠
+            tRestaurant prod = db.tRestaurant.FirstOrDefault(p => p.fId == id);
+                if(prod!=null)
+                 {
+                db.tRestaurant.Remove(prod);
+                db.SaveChanges();
+                 }
+                 return RedirectToAction("List");
+        }
+
+        public ActionResult Create()
+        {
+            
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(tRestaurant p)//製作一個參數
+        {
+            db990DemoEntities2 db = new db990DemoEntities2();//新增找工廠
+            db.tRestaurant.Add(p);//新增找工廠宣告在最上面
+            db.SaveChanges();//存回資料庫
+            return RedirectToAction("List");//存回List
+        }
+    }
+}

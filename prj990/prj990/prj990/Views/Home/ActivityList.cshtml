@@ -1,0 +1,243 @@
+﻿@*@model IEnumerable<prj990.Models.tActivity>*@
+@model prj990.ViewModel.ActivityViewModel
+
+@{ ViewBag.Title = "ActivityList";
+  Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<style>
+  * {
+    box-sizing: border-box
+  }
+
+  .card:hover {
+    box-shadow: 0 16px 32px 0 rgba(48, 55, 66, 0.15);
+    transform: translate(0,-5px);
+    transition-delay: 0s !important;
+  }
+</style>
+
+
+
+
+<head>
+
+</head>
+<body style=" margin-top: 0">
+  <h2 class="text-big1 mt-4">揪團中活動</h2>
+  @using(Html.BeginForm())
+    {
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <form class="form-inline mt-4">
+        <div class="form-group">
+
+          <p>
+            @Html.ActionLink("我要揪團","Login","null",new { @class = "btn btn-info" })
+          </p>
+          <h4 class="mt-4">關鍵字查詢</h4>
+          <p>
+            @Html.TextBox("txtKeyword")
+            @*<input type="submit" value="查詢">*@
+          </p>
+          <hr>
+          <input type="hidden" id="txtCity" name="txtCity" value="" />
+          <input type="hidden" id="txtDist" name="txtDist" value="" />
+          <h4 class="mt-4">地區</h4>
+          <select id="city" name="city" onchange="changeCity(this.selectedIndex)" style="width:90px;">
+          </select>
+          <select id="dist" name="dist" onchange="changeDist(this.selectedIndex)" style="width:90px;">
+          </select>
+          <script type="text/javascript">
+            //地區的陣列
+            var colleges = ['', '臺南市', '高雄市', '屏東縣'];
+            //document就是這html文件。
+            //getElementById是裡面的方法，參數給"college-list"抓到這id標籤列
+            var collegeSelect = document.getElementById("city");
+            //製造一個字串，以html的語法填入院的陣列
+            var inner = "";
+            for (var i = 0; i < colleges.length; i++) {
+              //inner第一行就會像是 <option value=0>商學院</option>
+              inner = inner + '<option value=i>' + colleges[i] + '</option>';
+            }
+            //innerHTML 賦值inner給這element屬性
+            collegeSelect.innerHTML = inner;
+            /*
+            其實就是用程式碼的方式把XML文件修改成這樣
+            <select id="college-list">
+                <option value="0">商學院</option>
+                <option value="1">工學院</option>
+                <option value="2">建設學院</option>
+                <option value="3">建築專業學院</option>
+                ....
+            </select>
+            */
+            //這裡放系所的陣列(有順序性，對應各學院的資料)
+            var sectors = new Array();
+            sectors[0] = [''];
+            sectors[1] = [''];
+            sectors[2] = ['', '楠梓區', '左營區', '鼓山區', '三民區', '鹽埕區', '前金區', '新興區', '苓雅區', '前鎮區', '小港區', '旗津區', '鳳山區', '大寮區', '鳥松區', '林園區', '仁武區', '大樹區', '大社區', '岡山區', '路竹區', '橋頭區', '梓官區', '彌陀區', '永安區', '燕巢區', '田寮區', '阿蓮區', '茄萣區', '湖內區', '旗山區', '美濃區', '內門區', '杉林區', '甲仙區', '六龜區', '茂林區', '桃源區', '那瑪夏區'
+            ];
+            sectors[3] = [''];
+
+            //動到"college-list"這select元素後呼叫此方法
+            function changeCity(index) {
+              //跟剛剛一樣，製造一個字串，以html的語法填入系所的陣列
+              var Sinner = "";
+              var City = city.options[city.selectedIndex].text;
+              var textCity = document.getElementById("txtCity");
+              textCity.value = City;
+
+              for (var i = 0; i < sectors[index].length; i++) {
+                Sinner = Sinner + '<option value=i>' + sectors[index][i] + '</option>';
+              }
+              //抓到"sector-list"這select元素，修改其值
+              var sectorSelect = document.getElementById("dist");
+              sectorSelect.innerHTML = Sinner;
+            }
+
+            //這裡呼叫一次"changeCollege"這方法，讓瀏覽器在讀完XML後可以直接讓系所的資料出來(商學院)
+            changeCity(document.getElementById("city").selectedIndex);
+            function changeDist(index) {
+              var Dist = dist.options[dist.selectedIndex].text;
+              var textDist = document.getElementById("txtDist");
+              textDist.value = Dist;
+            }
+          </script>
+          <h4 class="mt-4">性別限制</h4>
+          @Html.RadioButton("gender",1)@ViewBag.gender1
+          @Html.RadioButton("gender",2)@ViewBag.gender2
+          @Html.RadioButton("gender",3)@ViewBag.gender3
+          <hr>
+          <h4 class="mt-4">結帳方式</h4>
+          @Html.RadioButton("checkout",1)@ViewBag.checkout1
+          @Html.RadioButton("checkout",2)@ViewBag.checkout2<br />
+          @Html.RadioButton("checkout",3)@ViewBag.checkout3
+          @Html.RadioButton("checkout",4)@ViewBag.checkout4
+          <hr>
+          <h4 class="mt-4">活動日期</h4>
+          <input type="date" id="actTime" name="actTime" class="form-control">
+          <script>
+            var today = new Date();
+            var dd = today.getDate();
+            var MM = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var hh = today.getHours();
+            var mm = today.getMinutes();
+            if (dd < 10) {
+              dd = '0' + dd
+            }
+            if (MM < 10) {
+              MM = '0' + MM
+            }
+            if (mm < 10) {
+              mm = '0' + mm
+            }
+            today = yyyy + '-' + MM + '-' + dd + 'T' + hh + ':' + mm;
+            document.getElementById("actTime").setAttribute("min", today);</script>
+          <hr>
+          <input type="submit" value="查詢" class="btn btn-success">
+        </div>
+      </form>
+    </div>
+
+
+    <div class="col-md-10">
+      <div>
+        <div class="row">
+          @{ foreach(var item in Model.Activity)
+              {
+              if(item.fState == 1)//狀態為進行中
+                {
+                string gender = "";
+                if(item.fGender == 1)
+                  {
+                  gender = @ViewBag.gender1;
+                  }
+                else if(item.fGender == 2)
+                  {
+                  gender = @ViewBag.gender2;
+                  }
+                else if(item.fGender == 3)
+                  {
+                  gender = @ViewBag.gender3;
+                  }
+                string checkout = "";
+                if(item.fCheckout == 1)
+                  {
+                  checkout = @ViewBag.checkout1;
+                  }
+                else if(item.fCheckout == 2)
+                  {
+                  checkout = @ViewBag.checkout2;
+                  }
+                else if(item.fCheckout == 3)
+                  {
+                  checkout = @ViewBag.checkout3;
+                  }
+                else if(item.fCheckout == 4)
+                  {
+                  checkout = @ViewBag.checkout4;
+                  }
+    <div class="col-12 col-md-4">
+      <div class="card card shadow border-0 my-3" style="width: 22rem;" @*style="width: 100%;padding: 20px;height:430px"*@>
+          <div class="card-body">
+              <input type="hidden" name="hostId" value="@Html.DisplayFor(modelItem => item.fHostId)" />
+              @{ foreach (var host in Model.Member)
+                  {
+                      if (host.fId == @item.fHostId)
+                      {
+          <p> <img src="~/images/Member/@host.fImg" class=" rounded-circle me-3 me-3" style="width:100px;height:100px" ; />主揪人: @Html.ActionLink(@host.fName, "MemberInfopublic", new { id = item.fHostId }, new { @style = "text-decoration:none  ; color: #00879a  " }) </p> }
+  } }
+
+              @*<p>主揪人: @Html.ActionLink(@host.fName,"MemberInfopublic",new { id = item.fHostId }) </p> }
+        <a href="#">主揪人: @Html.ActionLink(@host.fName,"MemberInfopublic",new { id = item.fHostId }) </a>*@
+
+              <h4 class="card-title">
+                  <b>
+                      @Html.DisplayFor(modelItem => item.fName)
+                  </b>
+              </h4>
+              <div class="card-body">
+                  <h5>@Html.DisplayFor(modelItem => item.fRestaurant)</h5>
+                  <h6 style="color:	#5B5B5B">@Html.DisplayFor(modelItem => item.fAddress)</h6>
+                  <h5>
+                      活動時間：<br />
+                      @Html.DisplayFor(modelItem => item.fActivityTime)
+                  </h5>
+              </div>
+              <ul>
+                  <li>
+                      邀請人數:
+                      @Html.DisplayFor(modelItem => item.fPCount)
+                      人
+                  </li>
+                  <li>性別限制：@gender</li>
+                  <li>結帳方式：@checkout</li>
+                  <li>預計金額：@Html.DisplayFor(modelItem => item.fPrice)元</li>
+                  <li>活動資訊: @Html.DisplayFor(modelItem => item.fInfo)</li>
+
+              </ul>
+              主揪最終審核時間：<br />
+              @Html.DisplayFor(modelItem => item.fConfirmTime)<br />
+              <br />
+
+              <div style="text-align: center">
+                  @Html.ActionLink("我要報名", "Login", "null", new { @class = "btn btn-info bt-4" })
+                  @if (ViewBag.userid == 9)
+                  {
+          @Html.ActionLink("刪除活動", "ActivityDelete", new { id = item.fId }, new { onclick = "return confirm('確定要刪除嗎?');", @class = "btn btn-danger" })}
+
+              </div>
+          </div>
+      </div>
+    </div> }
+  } }
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>}
+</body>

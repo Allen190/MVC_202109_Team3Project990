@@ -1,0 +1,113 @@
+﻿@model prj990.Models.tMember
+
+@{ ViewBag.Title = "會員註冊"; }
+
+
+<style>
+  * {
+    box-sizing: border-box
+  }
+
+  .Register {
+    width: 420px;
+    margin: 0 auto;
+  }
+</style>
+
+
+
+@using(Html.BeginForm())
+  {
+@Html.AntiForgeryToken()
+
+
+        <div class="py-5">
+          <div class="Register">
+            <div class="card shadow border-0">
+              <div class="card-body">
+                <div class="form-horizontal">
+                  <h2 class="text-big1 text-center">會員註冊</h2>
+                  <div>
+
+                    @Html.ValidationSummary(true,"",new { @class = "text-danger" })
+
+                    @Html.LabelFor(model => model.fUserId,htmlAttributes: new
+                      { @class = "control-label col-md-2" })
+                    <div class="class=" form-floating"">
+                      @Html.EditorFor(model => model.fUserId,new
+                        {
+                        htmlAttributes = new { @class = "form-control" }
+                        })
+                      @Html.ValidationMessageFor(model => model.fUserId,"",new { @class = "text-danger" })
+                    </div>
+
+
+                    <div class="form-group">
+                      @Html.LabelFor(model => model.fPWd,htmlAttributes: new { @class = "control-label col-md-2" })
+                      <div class="class=" form-floating"">
+                        @Html.EditorFor(model => model.fPWd,new { htmlAttributes = new { @class = "form-control",type = "password" } })
+                        @Html.ValidationMessageFor(model => model.fPWd,"",new { @class = "text-danger" })
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      @Html.LabelFor(model => model.fRePwd,htmlAttributes: new { @class = "control-label col-md-2" })
+                      <div class="class=" form-floating"">
+                        @Html.EditorFor(model => model.fRePwd,new { htmlAttributes = new { @class = "form-control",type = "password" } })
+                        @Html.ValidationMessageFor(model => model.fRePwd,"",new { @class = "text-danger" })
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      @Html.LabelFor(model => model.fName,htmlAttributes: new { @class = "control-label col-md-2" })
+                      <div class="class=" form-floating"">
+                        @Html.EditorFor(model => model.fName,new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.fName,"",new { @class = "text-danger" })
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      @Html.LabelFor(model => model.fGender,htmlAttributes: new { @class = "control-label col-md-2" })
+                      <div class="class=" form-floating"">
+                        <span style="font-size:12pt">男</span>
+                        @Html.RadioButtonFor(model => model.fGender,"男",new { })
+                        <span style="font-size:12pt">女</span>
+                        @Html.RadioButtonFor(model => model.fGender,"女",new { })
+                        @Html.ValidationMessageFor(model => model.fGender,"",new { @class = "text-danger" })
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      @Html.LabelFor(model => model.fEmail,htmlAttributes: new { @class = "control-label col-md-2" })
+                      <div class="class=" form-floating"">
+                        @Html.EditorFor(model => model.fEmail,new { htmlAttributes = new { @class = "form-control",Type = "email",placeholder = "123@gmail.com" } })
+                        @Html.ValidationMessageFor(model => model.fEmail,"",new { @class = "text-danger" })
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      @Html.LabelFor(model => model.fTel,htmlAttributes: new { @class = "control-label col-md-2" })
+                      <div class="class=" form-floating"">
+                        @Html.EditorFor(model => model.fTel,new { htmlAttributes = new { @class = "form-control",type = "tel",placeholder = "手機號碼:0970123456",size = "20",minlength = "10",maxlength = "10" } })
+                        @Html.ValidationMessageFor(model => model.fTel,"",new { @class = "text-danger" })
+                      </div>
+                    </div>
+                    @Html.TextBoxFor(model => model.fImg,new { @Value = "99.png",@type = "hidden" })
+
+                    <div class="form-group">
+                      <div class="col-md-offset-2 col-md-12">
+                        <input type="submit" value="會員註冊" class="btn btn-info mt-3" style="float:left" />
+                        <input class="btn btn-dark mt-3 " type="button" onclick="history.back()" value="回到上一頁" style="float:right" />
+                        <a style="color:red">@ViewBag.Message</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>}
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,38 @@
+@model IEnumerable<prj990.Models.tRestaurant>
+@{ ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml"; }
+<h2>餐廳推薦</h2>
+@using (Html.BeginForm())
+{
+<p>
+    關鍵字 @Html.TextBox("txtKeyword")
+    <input type="submit" value="查詢">
+</p>}
+<p style="margin-top:20px">
+    @Html.ActionLink("新增", "Create")
+</p>
+
+<div class=" row" style="margin-top:20px;">
+    @foreach (var item in Model)
+    {
+<div class="col-md-4">
+    <div class="thumbnail">
+        <img src="../images/Restaurant/@item.fImg" style="width:300px;height:270px;" />
+        <div class="caption text-center">
+            <h4>餐廳:@item.fName</h4>
+            <p>地址:@item.fAddress</p>
+            <p>電話:@item.fTel</p>
+            <p>營業時間:@item.fData</p>
+            <p>價位:@item.fPrice</p>
+            <p>優惠:@item.fDiscount</p>
+
+            <p>
+                <a href="@Url.Action("Activity","Member")?fId=@item.fId" class="btn btn-primary">開啟揪團</a>
+                @Html.ActionLink("修改", "Edit", new { id = item.fId })|
+                @Html.ActionLink("刪除", "Delete", new { id = item.fId }, new { onclick = "return confirm('確定要刪除嗎?')" })
+            </p>
+        </div>
+    </div>
+</div>}
+
+</div>

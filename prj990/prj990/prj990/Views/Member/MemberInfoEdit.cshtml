@@ -1,0 +1,161 @@
+﻿@model prj990.Models.tMember
+
+@{ ViewBag.Title = "MemberInfoEdit";
+  Layout = "~/Views/Shared/_LayoutMember.cshtml"; }
+<style>
+  * {
+    box-sizing: border-box
+  }
+
+  .MemberInfo {
+    width: 420px;
+    margin: 0 auto;
+  }
+</style>
+
+<h2 class="text-center text-big1 mt-4">@Session["MemberName"]的資料修改新增</h2>
+
+
+@using(Html.BeginForm())
+  {
+@Html.AntiForgeryToken()
+        <div class="py-5">
+          <div class="MemberInfo">
+            <div class="card shadow border-0">
+              <div class="card-body">
+                <div class="form-horizontal">
+
+                  @Html.ValidationSummary(true,"",new { @class = "text-danger" })
+                  @Html.HiddenFor(model => model.fId)
+
+                  @* <div class="form-group">
+                        @Html.LabelFor(model => model.fUserId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fUserId, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fUserId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                  @*<div class="form-group">
+                        @Html.LabelFor(model => model.fPWd, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fPWd, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fPWd, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fName,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.EditorFor(model => model.fName,new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.fName,"",new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  @* <div class="form-group">
+                        @Html.LabelFor(model => model.fEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fEmail, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fEmail, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fTel, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fTel, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fTel, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                  @*<div class="form-group">
+                        @Html.LabelFor(model => model.fGender, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <span style="font-size:12pt">男</span>
+                            @Html.RadioButtonFor(model => model.fGender, "男", new { })
+                            <span style="font-size:12pt">女</span>
+                            @Html.RadioButtonFor(model => model.fGender, "女", new { })
+                            @Html.ValidationMessageFor(model => model.fGender, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fAge,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.EditorFor(model => model.fAge,new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.fAge,"",new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  @*<div class="form-group">
+                        @Html.LabelFor(model => model.fAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fAddress, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fAddress, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fImg,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.EditorFor(model => model.fImg,new { htmlAttributes = new { @class = "form-control",type = "file" } })
+                      @Html.ValidationMessageFor(model => model.fImg,"",new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    @Html.LabelFor(model => model.fHobby,htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-12">
+                      @Html.EditorFor(model => model.fHobby,new { htmlAttributes = new { @class = "form-control" } })
+                      @Html.ValidationMessageFor(model => model.fHobby,"",new { @class = "text-danger" })
+                    </div>
+                  </div>
+
+
+
+                  @*<div class="form-group">
+                            @Html.LabelFor(model => model.fFollow, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.fFollow, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.fFollow, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.fPoint, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.fPoint, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.fPoint, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.fLock, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.fLock, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.fLock, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                  <div class="form-group">
+                    <div class="col-md-offset-2 col-md-12 mt-3">
+                      <input type="submit" value="儲存修改" class="btn btn-info" />
+                      @Html.ActionLink("修改密碼","MemberPwd","null",new { @class = "btn btn-success" })
+                      @Html.ActionLink("刪除會員","MemberDelete",new { id = Model.fId },new { onclick = "return confirm('確定要刪除嗎?');",@class = "btn btn-danger" })
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>}
+
+<div>
+  @Html.ActionLink("回上一頁","MemberInfoList","null",new { @class = "btn btn-dark" })
+</div>
+
+@section Scripts {
+  @Scripts.Render("~/bundles/jqueryval")
+}

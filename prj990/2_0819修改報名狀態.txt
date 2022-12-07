@@ -1,0 +1,21 @@
+0819
+
+聊天室開啟條件:活動狀態(tActivity.fState)=3
+(活動狀態代碼--1:開團中;2:團主取消活動;3:已成團)
+
+聊天室成員條件:報名列表(tSignUp.fState)=2
+(報名狀態代碼--1:已報名;2:報名成功;3:隱藏(報名者不會知道);4.未入選)
+
+
+修改View:
+MemberInfoList活動狀態判斷、報名審核狀態判斷、取消報名條件修改
+
+SignUpList顯示內容修改、新增按鈕(選他、隱藏)
+
+
+Membercontroller 新增AddThisMember、HiddenThisMember
+
+
+修改Controller:SignUpList
+
+

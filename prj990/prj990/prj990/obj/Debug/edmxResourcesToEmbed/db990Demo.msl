@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="db990DemoModelStoreContainer" CdmEntityContainer="db990DemoEntities">
+    <EntitySetMapping Name="tActivity">
+      <EntityTypeMapping TypeName="db990DemoModel.tActivity">
+        <MappingFragment StoreEntitySet="tActivity">
+          <ScalarProperty Name="fId" ColumnName="fId" />
+          <ScalarProperty Name="fAId" ColumnName="fAId" />
+          <ScalarProperty Name="fName" ColumnName="fName" />
+          <ScalarProperty Name="fHostName" ColumnName="fHostName" />
+          <ScalarProperty Name="fCount" ColumnName="fCount" />
+          <ScalarProperty Name="fGender" ColumnName="fGender" />
+          <ScalarProperty Name="fQty" ColumnName="fQty" />
+          <ScalarProperty Name="fActivityTime" ColumnName="fActivityTime" />
+          <ScalarProperty Name="fConfirmTime" ColumnName="fConfirmTime" />
+          <ScalarProperty Name="fPoint" ColumnName="fPoint" />
+          <ScalarProperty Name="fRestaurant" ColumnName="fRestaurant" />
+          <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+          <ScalarProperty Name="fCheckpay" ColumnName="fCheckpay" />
+          <ScalarProperty Name="fState" ColumnName="fState" />
+          <ScalarProperty Name="fInfo" ColumnName="fInfo" />
+          <ScalarProperty Name="fRInfo" ColumnName="fRInfo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tMember">
+      <EntityTypeMapping TypeName="db990DemoModel.tMember">
+        <MappingFragment StoreEntitySet="tMember">
+          <ScalarProperty Name="fId" ColumnName="fId" />
+          <ScalarProperty Name="fUserId" ColumnName="fUserId" />
+          <ScalarProperty Name="fPWd" ColumnName="fPWd" />
+          <ScalarProperty Name="fName" ColumnName="fName" />
+          <ScalarProperty Name="fEmail" ColumnName="fEmail" />
+          <ScalarProperty Name="fTel" ColumnName="fTel" />
+          <ScalarProperty Name="fGender" ColumnName="fGender" />
+          <ScalarProperty Name="fAge" ColumnName="fAge" />
+          <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+          <ScalarProperty Name="fImg" ColumnName="fImg" />
+          <ScalarProperty Name="fHobby" ColumnName="fHobby" />
+          <ScalarProperty Name="fFollow" ColumnName="fFollow" />
+          <ScalarProperty Name="fPoint" ColumnName="fPoint" />
+          <ScalarProperty Name="fLock" ColumnName="fLock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tRestaurant">
+      <EntityTypeMapping TypeName="db990DemoModel.tRestaurant">
+        <MappingFragment StoreEntitySet="tRestaurant">
+          <ScalarProperty Name="fId" ColumnName="fId" />
+          <ScalarProperty Name="fRId" ColumnName="fRId" />
+          <ScalarProperty Name="fName" ColumnName="fName" />
+          <ScalarProperty Name="fAddress" ColumnName="fAddress" />
+          <ScalarProperty Name="fTel" ColumnName="fTel" />
+          <ScalarProperty Name="fPrice" ColumnName="fPrice" />
+          <ScalarProperty Name="fDiscount" ColumnName="fDiscount" />
+          <ScalarProperty Name="fData" ColumnName="fData" />
+          <ScalarProperty Name="fImg" ColumnName="fImg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

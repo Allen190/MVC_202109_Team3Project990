@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db990DemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tActivity">
+    <Key>
+      <PropertyRef Name="fId" />
+    </Key>
+    <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fAId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fHostName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fCount" Type="Int32" />
+    <Property Name="fGender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fQty" Type="Int32" />
+    <Property Name="fActivityTime" Type="DateTime" Precision="3" />
+    <Property Name="fConfirmTime" Type="DateTime" Precision="3" />
+    <Property Name="fPoint" Type="Int32" />
+    <Property Name="fRestaurant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fCheckpay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fState" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fRInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tMember">
+    <Key>
+      <PropertyRef Name="fId" />
+    </Key>
+    <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fPWd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fGender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fAge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fAddress" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="fImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fHobby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fFollow" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fPoint" Type="Int32" />
+    <Property Name="fLock" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tRestaurant">
+    <Key>
+      <PropertyRef Name="fId" />
+    </Key>
+    <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fRId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fTel" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="fPrice" Type="Int32" />
+    <Property Name="fDiscount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fData" Type="DateTime" Precision="3" />
+    <Property Name="fImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="db990DemoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tActivity" EntityType="Self.tActivity" />
+    <EntitySet Name="tMember" EntityType="Self.tMember" />
+    <EntitySet Name="tRestaurant" EntityType="Self.tRestaurant" />
+  </EntityContainer>
+</Schema>

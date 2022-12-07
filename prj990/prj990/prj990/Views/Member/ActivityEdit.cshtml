@@ -1,0 +1,170 @@
+﻿@model prj990.Models.tActivity
+
+@{
+    ViewBag.Title = "ActivityEdit";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml";
+}
+
+<h2>編輯我的揪團</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.fId)
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.fAId, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fAId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fAId, "", new { @class = "text-danger" })
+            </div>
+        </div*@>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fRestaurant, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fRestaurant, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fRestaurant, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fAddress, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fAddress, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fAddress, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fConfirmTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fConfirmTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fConfirmTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fActivityTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fActivityTime, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fActivityTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @*<div class="form-group">
+            @Html.LabelFor(model => model.fCount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fCount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fCount, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fGender, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(Model => Model.fGender, 1, new { @id = "gender1", @name = "gender1" })
+                <label>@ViewBag.gender1</label>
+                @Html.RadioButtonFor(Model => Model.fGender, 2, new { @id = "gender2", @name = "gender2" })
+                <label>@ViewBag.gender2</label>
+                @Html.RadioButtonFor(Model => Model.fGender, 3, new { @id = "gender3", @name = "gender3" })
+                <label>@ViewBag.gender3</label>
+                @Html.ValidationMessageFor(model => model.fGender, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fCheckout, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(Model => Model.fCheckout, 1, new { @id = "checkout1", @name = "checkout1" })
+                <label for="checkout1">@ViewBag.checkout1</label>
+                @Html.RadioButtonFor(Model => Model.fCheckout, 2, new { @id = "checkout2", @name = "checkout2" })
+                <label for="checkout2">@ViewBag.checkout2</label>
+                @Html.RadioButtonFor(Model => Model.fCheckout, 3, new { @id = "checkout3", @name = "checkout3" })
+                <label for="checkout3">@ViewBag.checkout3</label>
+                @Html.RadioButtonFor(Model => Model.fCheckout, 4, new { @id = "checkout4", @name = "checkout4" })
+                <label for="checkout4">@ViewBag.checkout4 </label>
+                @Html.ValidationMessageFor(model => model.fCheckout, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+        @* <div class="form-group">
+                @Html.LabelFor(model => model.fQty, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fQty, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fQty, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+
+
+        @*  <div class="form-group">
+                @Html.LabelFor(model => model.fPoint, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fPoint, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fPoint, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+
+
+        @* <div class="form-group">
+            <div class="form-group">
+                @Html.LabelFor(model => model.fState, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.fState, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.fState, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fInfo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fInfo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fInfo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.fRInfo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.fRInfo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fRInfo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

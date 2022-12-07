@@ -1,0 +1,278 @@
+﻿@*@model IEnumerable<prj990.Models.tMember>*@
+@*@model  IEnumerable<prj990.ViewModel.CMemberViewModel>*@
+@model prj990.ViewModel.CMemberViewModel
+
+@{ ViewBag.Title = "MemberInfoList";
+  Layout = "~/Views/Shared/_LayoutMember.cshtml"; }
+
+<style>
+  * {
+    box-sizing: border-box
+  }
+
+  .card:hover {
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, .25);
+    transition: all .2s ease-in-out;
+  }
+</style>
+
+<p style="margin-top:20px">
+  @*@Html.ActionLink("新增修改資料", "MemberInfoEdit")*@
+</p>
+@using(Html.BeginForm())
+  {
+<div class=" row" style="margin-top:20px;">
+  <div class="col-md-3">
+    <h2 class="text-big1 mt-3">@Session["MemberName"] 的活動資料</h2>
+    <div class="MemberInfo ">
+      <div class="card shadow border-0 my-3">
+        <img class="d-block mx-auto  rounded-circle  my-3" src="~/images/Member/@Model.Member.fImg" style="width:100px;height:100px" ; />
+        <div class="caption text-center">
+          <h4>@Model.Member.fName </h4>
+          <p> 年齡： @Model.Member.fAge </p>
+          <p> @Model.Member.fGender </p>
+          <p> @Model.Member.fHobby </p>
+          <p>
+            <a href="@Url.Action("ActivityCreate","Member")?fId=@Model.Member.fId" class="btn btn-info"> 開啟揪團</a>
+            @* @Html.ActionLink("刪除Member", "MemberDelete", new { id = Model.Member.fId }, new { onclick = "return confirm('確定要刪除嗎?')" })*@
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <h3 class="mt-3" style="font-weight: bold  ;color: #444444 "> 我發起的活動</h3>
+
+    <div class="thumbnail">
+      @foreach(var item in Model.Activity)
+        {
+        int count = 0;
+        string state = "";//活動狀態
+        foreach(var signup in Model.SignUp)
+          {
+          if(signup.fActivity == item.fId)
+            {
+            count++;
+            }
+          }
+        string gender = "";
+        if(item.fGender == 1)
+          {
+          gender = @ViewBag.gender1;
+          }
+        else if(item.fGender == 2)
+          {
+          gender = @ViewBag.gender2;
+          }
+        else if(item.fGender == 3)
+          {
+          gender = @ViewBag.gender3;
+          }
+        string checkout = "";
+        if(item.fCheckout == 1)
+          {
+          checkout = @ViewBag.checkout1;
+          }
+        else if(item.fCheckout == 2)
+          {
+          checkout = @ViewBag.checkout2;
+          }
+        else if(item.fCheckout == 3)
+          {
+          checkout = @ViewBag.checkout3;
+          }
+        else if(item.fCheckout == 4)
+          {
+          checkout = @ViewBag.checkout4;
+          }
+        if(item.fState == 1)
+          {
+          state = "揪團中";
+          }
+        else if(item.fState == 2)
+          {
+          state = "活動取消";
+          }
+        else if(item.fState == 5)
+          {
+          state = "揪團失敗";
+          }
+        else if(item.fState == 3)
+          {
+          state = "已成團";
+          }
+        if(item.fHostId == Model.Member.fId && item.fState != 2)
+          {
+<div class="card mb-3  border-1 p-3">
+  <div class="card-body">
+    <h4 class="card-title">@Html.DisplayFor(modelItem => item.fName) </h4>
+    <hr />
+    @{string Count = "目前報名人數：" + count + "人"; }
+    @Html.ActionLink(Count,"SignUpList",new { id = item.fId },new { @class = "btn btn-info mb-2" })
+    活動狀態：<span class="badge rounded-pill text-dark" style=" font-size: 1.2em;background-color: #95CACA"> @state </span>
+    @if(item.fState > 2 && item.fState != 5)//如果活動成團即可開啟聊天室
+      {
+@Html.ActionLink("開啟聊天室","ChatRoom",new { id = item.fId },new { @class = "btn btn-info " })}
+    <h6 style="line-height:1.8rem;">
+      餐廳：
+      @Html.DisplayFor(modelItem => item.fRestaurant)
+      <br />
+      地址：
+      @Html.DisplayFor(modelItem => item.fAddress)
+      <br />
+      活動時間：
+      @Html.DisplayFor(modelItem => item.fActivityTime)
+    </h6>
+    <ul>
+      <li> 邀請人數： @Html.DisplayFor(modelItem => item.fPCount) 人 </li>
+      <li> 性別限制： @gender </li>
+      <li> 結帳方式： @checkout </li>
+      <li> 預計金額： @Html.DisplayFor(modelItem => item.fPrice) 元</li>
+    </ul>
+    <h6 style="line-height:1.8rem;">
+      活動資訊： @Html.DisplayFor(modelItem => item.fInfo)
+      <br />
+      主揪最後確認時間：
+      <br />
+      @Html.DisplayFor(modelItem => item.fConfirmTime)
+    </h6>
+    <div align="center">
+      @if(item.fState != 3 && item.fState != 5)
+        {
+@Html.ActionLink("取消活動","ActivityCancel",new { id = item.fId },new { onclick = "return confirm('確定要取消活動嗎?')",@class = "btn btn-warning" })}
+    </div>
+  </div>
+
+</div>}
+}
+    </div>
+  </div>
+  <div class="col-md-4">
+    <h3 class="mt-3 " style="font-weight: bold;color: #444444"> 我報名的活動</h3>
+    <div class="thumbnail">
+      @foreach(var signup in Model.SignUp)
+        {
+        if(signup.fMember == Model.Member.fId)
+          {
+          foreach(var item in Model.Activity)
+            {
+            string state = "";
+            string gender = "";
+            string signupState = "待審核";//報名審核狀態
+            if(item.fGender == 1)
+              {
+              gender = @ViewBag.gender1;
+              }
+            else if(item.fGender == 2)
+              {
+              gender = @ViewBag.gender2;
+              }
+            else if(item.fGender == 3)
+              {
+              gender = @ViewBag.gender3;
+              }
+            string checkout = "";
+            if(item.fCheckout == 1)
+              {
+              checkout = @ViewBag.checkout1;
+              }
+            else if(item.fCheckout == 2)
+              {
+              checkout = @ViewBag.checkout2;
+              }
+            else if(item.fCheckout == 3)
+              {
+              checkout = @ViewBag.checkout3;
+              }
+            else if(item.fCheckout == 4)
+              {
+              checkout = @ViewBag.checkout4;
+              }
+            if(item.fState == 1)
+              {
+              state = "揪團中";
+              }
+            else if(item.fState == 2)
+              {
+              state = "團主取消活動";
+              }
+            else if(item.fState == 3)
+              {
+              state = "已成團";
+              }
+            else if(item.fState == 5)
+              {
+              state = "揪團失敗";
+              signupState = "未入選";
+              }
+            if(signup.fState == 2)
+              {
+              signupState = "報名成功";
+              }
+            else if(signup.fState == 4)
+              {
+              signupState = "未入選";
+              }
+            if(item.fId == signup.fActivity)
+              {
+<div class="card mb-3  border-1 p-3">
+  <div class="card-body">
+
+    @{ foreach(var host in Model.Host)
+        {
+        if(host.fId == @item.fHostId)
+          {
+<p> <img src="~/images/Member/@host.fImg" class=" rounded-circle  me-3" style="width:80px;height:80px" ;" />主揪人: @Html.ActionLink(@host.fName,"MemberInfopublic",new { id = item.fHostId },new { @style = "text-decoration:none; color: #00879a " }) </p> }
+} }
+    <h4 class="card-title">@Html.DisplayFor(modelItem => item.fName) </h4>
+    <hr />
+
+    活動狀態：<span class="badge rounded-pill text-dark mb-1 me-5" style=" font-size: 1.2em;background-color: #95CACA">@state </span>
+    @if(item.fState > 2 && signup.fState == 2 && item.fState != 5)//如果活動成團且錄取即可開啟聊天室
+      {
+@Html.ActionLink("開啟聊天室","ChatRoom",new { id = item.fId },new { @class = "btn btn-info " })}
+    <br />
+    審核狀態：<span class="badge rounded-pill text-dark" style=" font-size: 1.2em;background-color: #95CACA">@signupState </span>
+    <h6 style="line-height:1.8rem;">
+      餐廳：
+      @Html.DisplayFor(modelItem => item.fRestaurant)
+      <br />
+      地址：
+      @Html.DisplayFor(modelItem => item.fAddress)
+      <br />
+      活動時間：
+      @Html.DisplayFor(modelItem => item.fActivityTime)
+    </h6>
+    <ul>
+      <li> 邀請人數： @Html.DisplayFor(modelItem => item.fPCount) 人 </li>
+      <li> 性別限制： @gender </li>
+      <li> 結帳方式： @checkout </li>
+      <li> 預計金額： @Html.DisplayFor(modelItem => item.fPrice) 元</li>
+    </ul>
+    <h6 style="line-height:1.8rem;">
+      活動資訊： @Html.DisplayFor(modelItem => item.fInfo)
+      <br />
+      主揪最後確認時間：
+      <br /> @Html.DisplayFor(modelItem => item.fConfirmTime)
+      <br />
+      我的留言： @signup.fmessage
+      <br />
+    </h6>
+    <div align="center">
+      @if(signup.fState == 2 && item.fState == 3)
+        {
+        }
+      else
+        {
+@Html.ActionLink("取消報名","SignUpCancel",new { id = signup.fId },new { onclick = "return confirm('確定要取消報名嗎?')",@class = "btn btn-warning " })}
+    </div>
+  </div>
+</div>}
+}
+}
+}
+    </div>
+    <br>
+  </div>
+</div>}

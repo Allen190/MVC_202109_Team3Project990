@@ -1,0 +1,70 @@
+﻿@model prj990.ViewModel.CChatRoom
+
+@{ ViewBag.Title = "ChatRoom";
+    Layout = "~/Views/Shared/_LayoutMember.cshtml"; }
+@using (Html.BeginForm())
+{
+<h2 class="text-center text-big1 mt-3">@Model.Activity.fName 聊天室</h2>
+                <input type="hidden" name="ActivityId" value="@Model.Activity.fId">
+                                <h3 class="my-3"> 聊天室成員</h3>
+                                <div class="mb-3 mx-2">
+                                    @{foreach (var member in Model.Member)
+                                        {
+                                            if (Model.Activity.fHostId == member.fId)
+                                            {
+                                <a href="@Url.Action("MemberInfopublic", new { id = member.fId })" style="text-decoration: none;color: black">
+                                    <img class="rounded-circle ms-3" src="~/images/member/@member.fImg" style="width:70px;height:70px;" />
+                                    <span class="badge rounded-pill text-dark mb-1" style=" font-size: 1.2em;background-color: #95CACA">  @member.fName  </span>
+                                </a> }
+                        } }
+
+
+                                    @{ foreach (var signup in Model.SignUp)
+                                        {
+                                            foreach (var member in Model.Member)
+                                            {
+                                                if (signup.fMember == member.fId)
+                                                {
+                                <a href="@Url.Action("MemberInfopublic", new { id = member.fId })" style="text-decoration: none;color: black">
+                                    <img class="rounded-circle ms-3" src="~/images/member/@member.fImg" style="width:70px;height:70px;" />
+                                    @member.fName
+                                </a> }
+                        }
+
+                    } }
+
+
+                                </div>
+
+
+                                                                <div class="border border-primary py-3 px-3">
+                                                                    @{ foreach (var chat in Model.ChatRoom)
+                                                                        {
+                                                                            foreach (var member in Model.Member)
+                                                                            {
+                                                                                if (chat.fMemberId == member.fId)
+                                                                                {
+                                                        <h5>
+                                                            @member.fName : @chat.fMessage
+                                                            <span style="color: #95CACA; font-size: 15px; ">--------於 @chat.fDate</span>
+                                                        </h5> }
+                                                }
+                            <div>
+                            </div> } }
+                                                                </div>
+                                                                                <div>
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-md-offset-2 col-md-10 my-3">
+                                                                                            <input class=" col-md-5" name="message" />
+                                                                                            <input type="submit" value="送出" class="btn btn-info" />
+                                                                                            @*@Html.ActionLink("送出", "ChatRoom", "Member", new { id = Model.Activity.fId })*@
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>}
+
+
+@*@Html.ActionLink("回上一頁","MemberInfoList","null",new { @class = "btn btn-dark " })*@
+<div>
+    <input class="btn btn-dark " type="button" onclick="history.back()" value="回到上一頁" />
+</div>

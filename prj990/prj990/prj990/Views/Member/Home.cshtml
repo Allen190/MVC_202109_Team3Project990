@@ -1,0 +1,324 @@
+﻿@{ ViewBag.Title = "Index"; }
+@{Layout = null; }
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>揪揪食</title>
+  @Styles.Render("~/Content/home.css")
+  @Styles.Render("~/Content/font-awesome.css")
+  <link href="~/Content/Home.css" rel="stylesheet" />
+  <link rel="stylesheet" href="http://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta name="viewport" content="width =device-width, initial-scale=1">
+</head>
+<body>
+  <section id="banner" style="background: linear-gradient(rgba(0,0,0,0.5),#a5d1f0), url('../../images/Home/Group-Of-Friends-Enjoying-Meal-1024x683.jpg'); background-size: cover; background-position: center; height: 100vh; ">
+    <img src="~/images/Home/logo_工作區域 1.png" class="logo">
+    <div class="banner-text">
+      <h1>揪揪食</h1>
+      <p>美食不孤單，找食伴的第一選擇</p>
+      <div class="banner-btn">
+        <a href=" @Url.Action("Home", "Home") "><span></span>登出會員</a>
+      </div>
+      <div class="slider">
+        <div class="slide-track">
+          <div class="slide">
+            <img src="~/images/Home/s01.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s02.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s03.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s04.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s05.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s06.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s07.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s08.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s09.jpg">
+          </div>
+
+          <div class="slide">
+            <img src="~/images/Home/s01.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s02.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s03.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s04.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s05.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s06.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s07.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s08.jpg">
+          </div>
+          <div class="slide">
+            <img src="~/images/Home/s09.jpg">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div id="sideNav">
+    <nav>
+      <ul>
+        <li class="nav-link nav-link-ltr">@Html.ActionLink("首頁","Home","Member")</li>
+        <li class="nav-link nav-link-ltr">@Html.ActionLink("推薦餐廳","Index","Member")</li>
+        <li class="nav-link nav-link-ltr"> @Html.ActionLink("揪團中活動","ActivityList","Member")</li>
+        <li class="nav-link nav-link-ltr"><a href="@Url.Action("MemberInfo","Member")">@Session["MemberName"]</a></li>
+        <li class="nav-link nav-link-ltr">@Html.ActionLink("登出會員","Logout","Member")</li>
+      </ul>
+    </nav>
+
+  </div>
+  <div id="menuBtn">
+    <img src="~/images/Home/menu_工作區域 1.png" id="menu">
+  </div>
+
+
+  <section id="about">
+    <div class="title-text">
+      <p>美食揪團</p>
+      <h1>開啟屬於你的美食派對</h1>
+    </div>
+    <div class="about-box">
+      <div class="abouts">
+        <h1>自由選擇餐廳</h1>
+        <div class="abouts-desc">
+          <div class="about-icon mx-4">
+            <i class="fa fa-cutlery"></i>
+          </div>
+          <div class="about-text">
+            <p>選擇我們為您推薦的餐廳，或自行輸入餐廳資訊</p>
+          </div>
+        </div>
+        <h1>找到興趣一樣的食伴</h1>
+        <div class="abouts-desc">
+          <div class="about-icon">
+            <i class="fa fa-users"></i>
+          </div>
+          <div class="about-text">
+            <p>自由的報名者審核機制，想邀請誰參加活動由您決定</p>
+          </div>
+        </div>
+        <h1>用餐時間自己選擇</h1>
+        <div class="abouts-desc">
+          <div class="about-icon">
+            <i class="fa fa-clock-o"></i>
+          </div>
+          <div class="about-text">
+            <p>查詢功能可以幫助您快速篩選出符合需求的活動</p>
+          </div>
+        </div>
+        <h1>付款方式由你決定</h1>
+        <div class="abouts-desc">
+          <div class="about-icon">
+            <i class="fa fa-money"></i>
+          </div>
+          <div class="about-text">
+            <p>發起活動時即決定聚會的付款方式，避免爭議產生</p>
+          </div>
+        </div>
+
+      </div>
+      <div class="abouts-img">
+        <img src="~/images/Home/share.jpg">
+      </div>
+    </div>
+  </section>
+
+  <section id="store">
+    <div class="title-text">
+      <p>人氣店家</p>
+      <h1>揪揪食精選高評價店家推薦</h1>
+    </div>
+    <div class="store-box">
+      <div class="storeone">
+        <img class="img-rounded" src="~/images/Restaurant/01.png">
+        <div class="overlay"></div>
+        <div class="store-desc">
+          <h3>海底撈</h3>
+          <hr>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est saepe sequi porro enim deleniti inventore impedit sit architecto temporibus nihil!</p>
+        </div>
+      </div>
+      <div class="storeone">
+        <img class="img-rounded" src="~/images/Restaurant/02.jpg">
+        <div class="overlay"></div>
+        <div class="store-desc">
+          <h3>碳佐麻里</h3>
+          <hr>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est saepe sequi porro enim deleniti inventore impedit sit architecto temporibus nihil!</p>
+        </div>
+      </div>
+      <div class="storeone">
+        <img class="img-rounded" src="~/images/Restaurant/03.jpg">
+        <div class="overlay"></div>
+        <div class="store-desc">
+          <h3>西堤牛排</h3>
+          <hr>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est saepe sequi porro enim deleniti inventore impedit sit architecto temporibus nihil!</p>
+        </div>
+      </div>
+      <div class="storeone">
+        <img class="img-rounded" src="~/images/Restaurant/04.jpg">
+        <div class="overlay"></div>
+        <div class="store-desc">
+          <h3>必勝客</h3>
+          <hr>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est saepe sequi porro enim deleniti inventore impedit sit architecto temporibus nihil!</p>
+        </div>
+      </div>
+      <div class="storeone">
+        <img class="img-rounded" src="~/images/Restaurant/05.jpg">
+        <div class="overlay"></div>
+        <div class="store-desc">
+          <h3>八方雲集</h3>
+          <hr>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est saepe sequi porro enim deleniti inventore impedit sit architecto temporibus nihil!</p>
+        </div>
+      </div>
+      <div class="storeone">
+        <img src="~/images/Restaurant/06.png">
+        <div class="overlay"></div>
+        <div class="store-desc">
+          <h3>肯德基</h3>
+          <hr>
+          <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est saepe sequi porro enim deleniti inventore impedit sit architecto temporibus nihil!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  @*<section id="comment">
+        <div class="title-text">
+            <p>推薦揪團活動</p>
+            <h1>揪揪友評論大聲說</h1>
+        </div>
+        <div class="comment-row">
+            <div class="comment-col">
+                <div class="user">
+                    <img src="~/images/Member/004.jpg" style="width:80px;height:80px;">
+
+                    <div class="user-info">
+                        <h4>modo Chen  <i class="fa fa-coffee"></i> 145</h4>
+                        <small>ID : momodo</small>
+                    </div>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex numquam ipsa, ad, rem consectetur omnis nobis officiis aperiam expedita veniam mollitia quos. Deserunt dolore ratione voluptates provident dicta? Sunt, quo.</p>
+            </div>
+            <div class="comment-col">
+                <div class="user">
+                    <img src="~/images/Member/005.jpg" style="width:80px;height:80px;">
+
+                    <div class="user-info">
+                        <h4>Tina Lu  <i class="fa fa-coffee"></i> 115</h4>
+                        <small>ID : Tinaaaa</small>
+                    </div>
+                </div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel commodi non nobis natus ipsam in reprehenderit minima id iste inventore, similique possimus, iusto autem ut beatae officia quidem sunt placeat.</p>
+            </div>
+            <div class="comment-col">
+                <div class="user">
+                    <img class="img-circle" src="~/images/Member/006.jpg" style="width:80px;height:80px;">
+                    <div class="user-info">
+                        <h4>miki Kou <i class="fa fa-coffee"></i> 65</h4>
+                        <small>ID : miki0231</small>
+                    </div>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iure, velit quae non officiis explicabo earum, ea, praesentium tenetur eius reiciendis fugit dicta dolores ipsum modi ullam obcaecati pariatur? Minima, tempora?</p>
+            </div>
+        </div>
+    </section>*@
+
+
+  <section id="footer">
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="footer-col">
+            <h4>Team3-EAGLE</h4>
+            <ul>
+              <li><a href="#">有關我們</a></li>
+              <li><a href="#">服務</a></li>
+              <li><a href="#">老鷹相關</a></li>
+              <li><a href="#">老鷹新消息</a></li>
+              <li><a href="#">聯絡我們</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>幫助 Get Help</h4>
+            <ul>
+              <li><a href="#">Q&A</a></li>
+              <li><a href="#">1:1幫助</a></li>
+              <li><a href="#">老鷹相關幫助</a></li>
+              <li><a href="#">聯絡老鷹</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>揪食 join Food</h4>
+            <ul>
+              <li><a href="#">糾食</a></li>
+              <li><a href="#">開啟糾食</a></li>
+              <li><a href="#">加入糾食</a></li>
+              <li><a href="#">有關糾食</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>追隨我們 Follow Us</h4>
+            <div class="social-links">
+              <a href="#"> <i class="fa fa-facebook-official"></i></a>
+              <a href="#"><i class="fa fa-instagram"></i></a>
+              <a href="#"> <i class="fa fa-twitter"></i></a>
+              <a href="#"> <i class="fa fa-youtube-play"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <script>
+    var menuBtn = document.getElementById("menuBtn")
+    var sideNav = document.getElementById("sideNav")
+    var menu = document.getElementById("menu")
+
+    menuBtn.onclick = function () {
+      if (sideNav.style.right == "-250px") {
+        sideNav.style.right = "0";
+        menu.src = "/images/Home/close_工作區域 1.png";
+      }
+      else {
+        sideNav.style.right = "-250px";
+        menu.src = "/images/Home/menu_工作區域 1.png";
+      }
+    }
+  </script>
+
+</body>
+</html>

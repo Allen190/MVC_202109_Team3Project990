@@ -1,0 +1,59 @@
+﻿@{ ViewBag.Title = "會員登入"; }
+
+
+<style>
+  * {
+    box-sizing: border-box
+  }
+
+  .login {
+    width: 400px;
+    margin: 0 auto;
+  }
+</style>
+<div class="py-5">
+  <div class="login">
+    <div class="card shadow border-0">
+      <div class="card-body">
+        <form action="@Url.Action("Login")" method="post">
+          <div class="form-horizontal">
+            <h1 class=" text-center text-big1 ">會員登入</h1>
+            @*<div class="form-group">
+                  <span class="control-label col-md-2">帳號</span>
+                  <div class="col-md-10">
+                      <input type="text" name="fUserId" id="fUserId" required="required" class="form-control" />
+
+                  </div>
+              </div>*@
+            <div class="form-floating">
+              <input type="text" name="fUserId" id="fUserId" required="required" class="form-control" placeholder="name">
+              <label for="floatingInput">請輸入帳號</label>
+            </div>
+            <br />
+            @*<div class="form-floating">
+                  <span class="control-label col-md-2">密碼</span>
+                  <div class="col-md-10">
+                      <input type="password" name="fPWd" id="fPWd" required="required" class="form-control" />
+                  </div>
+              </div>*@
+            <div class="form-floating">
+              <input type="password" name="fPWd" id="fPWd" required="required" class="form-control" placeholder="Password">
+              <label for="floatingPassword">請輸入密碼</label>
+            </div>
+
+
+
+            <span style="color:red">@ViewBag.Message</span><br />
+
+            <button type="submit" class="btn btn-info w-100 d-block mt-2">登入</button>
+
+            <a class="btn   btn-success w-100  d-block mt-2" href=" @Url.Action("Register", "Home") ">註冊會員</a>
+
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>

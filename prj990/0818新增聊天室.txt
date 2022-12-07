@@ -1,0 +1,15 @@
+0818 
+1.新增聊天室(MemberController-ChatRoom)
+
+2.聊天室開啟條件:活動狀態(tActivity.fState)=3
+(活動狀態代碼--1:開團中;2:團主取消活動;3:已成團)
+
+3.聊天室成員條件:報名列表(tSignUp.fState)=2
+(報名狀態代碼--1:已報名;2:報名成功)
+
+4.MemberInfoList新增產生聊天室按鈕條件
+我發起的活動及我報名的活動-85、176行新增判斷fState狀態;99、185行新增按鈕
+
+5.新增ViewModel-CChatRoom
+
+6.新增tChatRoom資料表

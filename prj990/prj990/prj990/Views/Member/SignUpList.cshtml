@@ -1,0 +1,105 @@
+﻿@model prj990.ViewModel.CSignUpViewModel
+@{ ViewBag.Title = "SignUpList";
+  Layout = "~/Views/Shared/_LayoutMember.cshtml"; }
+<style>
+  .table {
+    --bs-table-hover-bg: #95CACA;
+  }
+
+  .table-dark {
+    --bs-table-bg: #00879a;
+  }
+</style>
+
+<div class="container mt-4">
+    <h2 class="text-big1" style="display: inline">@Model.Activity.fName </h2>
+    <h2 style="display: inline">報名者列表</h2>
+    <h4 class=" my-4" style="line-height:1.8rem;">餐廳：@Model.Activity.fRestaurant</h4>
+    <div class="row my-4">
+        <div class="col">
+            <h4>預計邀請的人數：@Model.Activity.fPCount 人</h4>
+        </div>
+        <div class="col">
+            <h4>目前邀請的人數：@Model.入選人數 人</h4>
+        </div>
+    </div>
+    <h4 class=" my-4" style="line-height:1.8rem;">目前邀請的成員:</h4>
+    <div class="row mx-4">
+        @foreach (var item in Model.SignUp)
+        {
+            if (item.fState == 2)
+            {
+                foreach (var member in Model.Member)
+                {
+                    if (item.fMember == member.fId)
+                    {
+<div class="col-md-2 border border-2 rounded">
+    <a href="@Url.Action("MemberInfopublic", new { id = member.fId })" style="text-decoration: none;color: black">
+        <img src="~/images/member/@member.fImg" class=" rounded-circle mx-3 " style="width:70px;height:70px;" />
+        @member.fName
+    </a>
+
+</div>}
+                    }
+                }
+            }
+    </div>
+    @*<input class="btn btn-dark " type="button" onclick="history.back()" value="回到上一頁" style="float:right" />*@
+    @Html.ActionLink("回到上一頁", "MemberInfoList", "Member", new {id=Model.Activity.fHostId }, new { @class = "btn btn-dark", style = "float:right" })
+</div>
+<div class="container">
+  @using(Html.BeginForm())
+    {
+    if(Model.Activity.fState == 1)
+      {
+<h4 class="mt-5">待審核名單</h4>
+          <table class="table  table-hover  align-middle ">
+            <thead>
+              <tr class="text-center table-dark">
+                <th>報名者</th>
+                <th>性別</th>
+                <th>年齡</th>
+                <th>他的留言 </th>
+                <th>是否邀請他</th>
+              </tr>
+            </thead>
+
+            @*<tr align="center">*@
+            <tbody>
+              @foreach(var item in Model.SignUp)
+                {
+                if(item.fState == 1)
+                  {
+                  foreach(var member in Model.Member)
+                    {
+                    if(item.fMember == member.fId)
+                      {
+
+    <tr class="text-center">
+      <th>
+        <a href="@Url.Action("MemberInfopublic", new { id = member.fId })" style="text-decoration: none; color: #00879a">
+          <img src="~/images/member/@member.fImg" class=" rounded-circle mx-3 " style="width:70px;height:70px;" />
+          @member.fName
+        </a>
+      </th>
+      <th>
+        @member.fGender
+      </th>
+      <th>
+        @member.fAge y
+      </th>
+
+      <th>@item.fmessage</th>
+      <th>
+        @Html.ActionLink("選他","AddThisMember","Member",new { id = item.fId },new { onclick = "return confirm('確定要選擇這位報名者嗎?*註:選擇後即無法取消');",@class = "btn  btn-info bt-4" })
+        @Html.ActionLink("隱藏","HiddenThisMember","Member",new { id = item.fId },new { @class = "btn btn-secondary" })
+      </th>
+    </tr>
+}
+  }
+}
+}
+            </tbody>
+          </table>}
+        }
+</div>

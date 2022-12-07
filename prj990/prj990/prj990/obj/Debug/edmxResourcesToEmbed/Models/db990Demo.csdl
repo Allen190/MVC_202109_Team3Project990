@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db990DemoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tMember">
+    <Key>
+      <PropertyRef Name="fId" />
+    </Key>
+    <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fUserId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fPWd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fTel" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="fGender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fAge" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fHobby" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fFollow" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fPoint" Type="Int32" />
+    <Property Name="fLock" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fRePwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="db990DemoEntities2" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tMember" EntityType="Self.tMember" />
+    <EntitySet Name="tSignUp" EntityType="db990DemoModel.tSignUp" />
+    <EntitySet Name="tActivity" EntityType="db990DemoModel.tActivity" />
+    <EntitySet Name="tRestaurant" EntityType="db990DemoModel.tRestaurant" />
+    <EntitySet Name="tChatRoom" EntityType="db990DemoModel.tChatRoom" />
+  </EntityContainer>
+  <EntityType Name="tSignUp">
+    <Key>
+      <PropertyRef Name="fId" />
+    </Key>
+    <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fMember" Type="Int32" />
+    <Property Name="fActivity" Type="Int32" />
+    <Property Name="fState" Type="Int32" />
+    <Property Name="fmessage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tActivity">
+    <Key>
+      <PropertyRef Name="fId" />
+    </Key>
+    <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fRestaurant" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fConfirmTime" Type="DateTime" Precision="3" />
+    <Property Name="fActivityTime" Type="DateTime" Precision="3" />
+    <Property Name="fInfo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="fPCount" Type="Int32" />
+    <Property Name="fGender" Type="Int32" />
+    <Property Name="fCheckout" Type="Int32" />
+    <Property Name="fHostId" Type="Int32" />
+    <Property Name="fPoint" Type="Int32" />
+    <Property Name="fPrice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fRInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fState" Type="Int32" />
+    <Property Name="fImag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tRestaurant">
+    <Key>
+      <PropertyRef Name="fId" />
+    </Key>
+    <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fRId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fTel" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="fPrice" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fDiscount" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fData" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fImg" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tChatRoom">
+    <Key>
+      <PropertyRef Name="fId" />
+    </Key>
+    <Property Name="fId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fActivityId" Type="Int32" />
+    <Property Name="fMemberId" Type="Int32" />
+    <Property Name="fDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="fMessage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>
